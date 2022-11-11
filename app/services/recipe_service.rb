@@ -1,5 +1,5 @@
 class RecipeService
-  def self.get_recipe(country)
+  def self.get_recipes(country)
     api_key = 'a1d62460d191ae34195c195984150c0b'
     app_id = 'f5a8487a'
     response = conn.get("?q=#{country}&app_id=#{app_id}&app_key=#{api_key}")
