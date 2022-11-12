@@ -14,6 +14,8 @@ RSpec.describe 'Recipes API' do
           recipes_data = JSON.parse(response.body, symbolize_names: true)
           recipes = recipes_data[:data]
 
+          expect(recipes_data).to be_a(Hash)
+
           expect(recipes.count).to eq(10)
 
           recipes.each do |recipe|
@@ -28,9 +30,27 @@ RSpec.describe 'Recipes API' do
         end
       end
 
-      it 'picks a random country if no country is specified' do
-        VCR.use_cassette('random_data') do
+      it 'picks a random country for the search term if one is not given' do
+        VCR.use_cassette('random_country_recipes') do
           
+          get "/api/v1/recipes"
+
+          expect(response).to be_successful
+          
+          recipes_data = JSON.parse(response.body, symbolize_names: true)
+          recipes = recipes_data[:data]
+          
+          expect(recipes_data).to be_a(Hash)
+          expect(recipes.count).to eq(88)
+          recipes.each do |recipe|
+            expect(recipe[:id]).to eq(nil)
+            expect(recipe[:type]).to eq("recipe")
+            expect(recipe[:attributes].count).to eq(4)
+            expect(recipe[:attributes][:title]).to be_a(String)
+            expect(recipe[:attributes][:url]).to be_a(String)
+            expect(recipe[:attributes][:country]).to be_a(String)
+            expect(recipe[:attributes][:image]).to be_a(String)
+          end
         end
       end
     end

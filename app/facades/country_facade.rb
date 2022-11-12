@@ -2,7 +2,7 @@ class CountryFacade
 
   def self.get_all_countries
     countries = CountryService.get_all_countries
-    countries = countries.map do |country|
+    countries.map do |country|
       Country.new(country)
     end
   end
