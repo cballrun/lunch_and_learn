@@ -6,7 +6,7 @@ RSpec.describe CountryService do
       VCR.use_cassette('all_countries') do
         all_countries = CountryService.get_all_countries
         
-        expect(all_countries).to be_a(Array)
+        expect(all_countries).to be_a(Array) #check: add count?
         expect(all_countries.first).to be_a(Hash)
         all_countries.each do |country|
           expect(country[:name]).to be_a(String)
