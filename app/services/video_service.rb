@@ -2,7 +2,7 @@ class VideoService
 
   def self.get_a_video(country)
     api_key = 'AIzaSyCycf61l0O2MfB969KdmCUiGRhh7aFfOOY'
-    response = conn.get("?part=snippet&channelId=UCluQ5yInbeAkkeCndNnUhpw&maxResults=1&q=#{country}&key=#{api_key}")
+    response = conn.get("?part=snippet&channelId=UCluQ5yInbeAkkeCndNnUhpw&maxResults=1&q=#{country}&key=#{api_key}") #check: maybe take out hard coded max results and use only the .first in the facade to make more dynamic
     parse(response.body)
   end
 
