@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.edamam.com/search?app_id=f5a8487a&app_key=a1d62460d191ae34195c195984150c0b&q=sunnyvale%20trailer%20park
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Sat, 12 Nov 2022 03:59:44 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Served-By:
+      - ip-10-0-1-36.ec2.internal/10.0.1.36
+      Vary:
+      - accept-encoding
+      Strict-Transport-Security:
+      - max-age=15552001
+      X-Request-Id:
+      - '029875773055052d90a425ca6508cc46'
+    body:
+      encoding: UTF-8
+      string: '{"q":"sunnyvale trailer park","from":0,"to":10,"more":false,"count":0,"hits":[]}'
+  recorded_at: Sat, 12 Nov 2022 03:59:45 GMT
+recorded_with: VCR 6.1.0
