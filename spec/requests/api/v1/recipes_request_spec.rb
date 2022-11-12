@@ -27,6 +27,12 @@ RSpec.describe 'Recipes API' do
           end
         end
       end
+
+      it 'picks a random country if no country is specified' do
+        VCR.use_cassette('random_data') do
+          
+        end
+      end
     end
 
     describe 'sad path' do
