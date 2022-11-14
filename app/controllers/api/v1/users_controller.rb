@@ -2,9 +2,9 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
+    user.api_key = SecureRandom.hex(15)
     if user.save
-      user.api_key = SecureRandom.hex(15)
-      render json: UserSerializer.new(user)
+      render json: UserSerializer.new(user), status: 201
     else
       "beepbooop"
     end
