@@ -18,7 +18,7 @@ RSpec.describe CountryService do
       VCR.use_cassette('france_data') do
         france_array = CountryService.get_a_country('france')
         france_data = france_array.first
-        binding.pry
+     
         expect(france_array).to be_a(Array)
         expect(france_data).to be_a(Hash)
 
