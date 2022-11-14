@@ -13,5 +13,21 @@ RSpec.describe CountryService do
         end
       end
     end
+
+    it 'gets the info for one country by name' do
+      VCR.use_cassette('france_data') do
+        france_array = CountryService.get_a_country('france')
+        france_data = france_array.first
+        
+        expect(france_array).to be_a(Array)
+        expect(france_data).to be_a(Hash)
+
+        expect(france_data[:name]).to eq("France")
+        expect(france_data[:population]).to be_a(Integer)
+        expect(france_data[:latlng]).to be_a(Array)
+        expect(france_data[:latlng].count).to eq(2)
+        expect(france_data[:latlng].first).to be_a(Float)
+      end
+    end
   end
 end

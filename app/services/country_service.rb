@@ -5,6 +5,11 @@ class CountryService
     parse(response.body)
   end
 
+  def self.get_a_country(country)
+    response = conn.get("/v2/name/#{country}")
+    parse(response.body)
+  end
+
   def self.conn
     Faraday.new("https://restcountries.com")
   end
