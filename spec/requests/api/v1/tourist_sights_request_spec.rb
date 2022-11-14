@@ -61,6 +61,21 @@ RSpec.describe 'Tourist Sights API' do
           expect(tourist_sight_data).to eq({:data=>[]})
         end
       end
+
+      it 'sends back an empty array if the param is an empty string' do
+        VCR.use_cassette('empty_string') do
+          params = {country: ""}
+          get "/api/v1/tourist_sights", params: params
+
+          expect(response).to be_successful
+
+          tourist_sight_data = JSON.parse(response.body, symbolize_names: true)
+
+          tourist_sights = tourist_sight_data[:data]
+          expect(tourist_sights). to eq([])
+          expect(tourist_sight_data).to eq({:data=>[]})
+        end
+      end
     end
 
   end

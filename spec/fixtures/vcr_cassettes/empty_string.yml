@@ -1,0 +1,95 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://restcountries.com/v2/name/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Mon, 14 Nov 2022 19:04:15 GMT
+      Server:
+      - Apache/2.4.38 (Debian)
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '85'
+    body:
+      encoding: UTF-8
+      string: '{"message":"Page Not Found","_links":{"self":{"href":"/v2/name/","templated":false}}}'
+  recorded_at: Mon, 14 Nov 2022 19:04:15 GMT
+- request:
+    method: get
+    uri: https://api.geoapify.com/v2/places?apiKey=09f808c78dd74d83a4b3995ee6ed6ea1&categories=tourism.sights&filter=circle:10000.0,-10000.0,20000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 14 Nov 2022 19:04:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Api-Version:
+      - '1.0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - accept, accept-language, content-language, access-control-max-age, access-control-allow-headers,
+        access-control-allow-methods, access-control-allow-origin, allow, api-version,
+        cf-ray, content-encoding, content-type, date, expect-ct, server, status, vary,
+        cache-control, etag, last-modified, expires, host, cf-ipcountry, cdn-loop,
+        accept-encoding, x-forwarded-for, x-forwarded-proto, cf-visitor, user-agent,
+        cf-connecting-ip, cf-pseudo-ipv4, x-forwarded-port
+      Access-Control-Allow-Methods:
+      - GET, POST, DELETE, OPTIONS, PUT
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, max-age=0, no-cache
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=YIjaBE%2BlZieCRjFLLvI9MwnfcDs%2FL8TFofiQ9pg4kG096rh6%2BMK%2BmalWZ%2F1Es5eYP5SbCgfGAcxnU%2BADF1dCr1YL9W46DplT7CW5dqHz19%2BFI2cvaZizyX50JbQB%2BmswFNE70Iy213KDrUiprZU%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 76a2030a0f19e3a6-ATL
+      Alt-Svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: '{"type":"FeatureCollection","features":[]}'
+  recorded_at: Mon, 14 Nov 2022 19:04:16 GMT
+recorded_with: VCR 6.1.0

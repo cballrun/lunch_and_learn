@@ -20,8 +20,9 @@ RSpec.describe PlaceService do
           expect(feature[:properties][:name]).to be_a(String)
           expect(feature[:properties][:formatted]).to be_a(String)
           expect(feature[:properties][:place_id]).to be_a(String)
+          expect(feature[:properties]).to have_key(:state)
+          expect(feature[:properties]).to have_key(:country)
         end
-        
       end
     end
   end
