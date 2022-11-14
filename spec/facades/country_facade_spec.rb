@@ -21,27 +21,20 @@ RSpec.describe CountryFacade do
     end
   end
 
-  it 'gets the longitutde of a given country' do
-    VCR.use_cassette('paris_sight_data') do
-       lng = CountryFacade.get_lng('france')
-
-      expect(lng).to be_a(Float)
-    end
-  end
-
-  it 'gets the latitude of a given country' do
-    VCR.use_cassette('paris_sight_data') do
-      lat = CountryFacade.get_lat('france')
-
-      expect(lat).to be_a(Float)
-    end
-  end
-
   it 'gets the latitude and longitude of a given country' do
     VCR.use_cassette('paris_sight_data') do
       latlng = CountryFacade.get_latlng('france')
-
+  
       expect(latlng).to be_a(Array)
+    end
+  end
+
+  it 'latlng works with ecuador' do
+    VCR.use_cassette('ecuador_data',:allow_playback_repeats => true) do
+      latlng = CountryFacade.get_latlng("ecuador")
+     
+      expect(latlng).to be_a(Array)
+
     end
   end
 end

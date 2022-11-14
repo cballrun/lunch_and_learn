@@ -12,17 +12,6 @@ class CountryFacade
     countries.sample
   end
 
-  def self.get_lng(country)
-    country = CountryService.get_a_country(country).first
-
-    country[:latlng].last#, country[:latlng].first
-  end
-
-  def self.get_lat(country)
-    country = CountryService.get_a_country(country).first
-
-    country[:latlng].first#, country[:latlng].first
-  end
 
   def self.get_latlng(country)
     country = CountryService.get_a_country(country).first
