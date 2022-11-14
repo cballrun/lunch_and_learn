@@ -31,5 +31,17 @@ RSpec.describe 'Learning Resources API' do
         end
       end
     end
+
+    describe 'sad path' do
+      it 'returns empty arrays if nothing is found' do
+        VCR.use_cassette('random_string_data') do
+          params = {country: "98asdsa7gghsdfaq55daqwrff"}
+
+          get "/api/v1/learning_resources", params: params
+          binding.pry
+          expect(response).to be_successful
+        end
+      end
+    end
   end
 end

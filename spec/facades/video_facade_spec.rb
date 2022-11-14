@@ -10,4 +10,11 @@ RSpec.describe VideoFacade do
       expect(video.youtube_video_id).to be_a(String)
     end
   end
+
+  it 'returns an empty array if there are no videos found' do
+    VCR.use_cassette('random_string_video') do
+      video = VideoFacade.get_a_video("98asdsa7gghsdfaq55daqwrff")
+      expect(video).to eq([])
+    end
+  end
 end
