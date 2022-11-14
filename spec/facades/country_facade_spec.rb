@@ -37,4 +37,13 @@ RSpec.describe CountryFacade do
 
     end
   end
+
+  it 'works with an invalid country' do
+    VCR.use_cassette('invalid_country_data') do
+      latlng = CountryFacade.get_latlng("esadfdsa558s3")
+
+      expect(latlng).to be_a(Array)
+      expect(latlng).to eq([-10000.0, 10000.0])
+    end
+  end
 end

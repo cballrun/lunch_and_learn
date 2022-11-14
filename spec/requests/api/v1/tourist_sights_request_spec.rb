@@ -46,6 +46,15 @@ RSpec.describe 'Tourist Sights API' do
           expect(tourist_sight_data).to eq({:data=>[]})
         end
       end
+
+      it 'sends back aan empty array for an invalid country' do
+        VCR.use_cassette('invalid_country_data_2') do
+          params = {country: "esadfdsa558s3"}
+          get "/api/v1/tourist_sights", params: params
+
+          expect(response).to be_successful
+        end
+      end
     end
 
   end

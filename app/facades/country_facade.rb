@@ -14,7 +14,12 @@ class CountryFacade
 
 
   def self.get_latlng(country)
-    country = CountryService.get_a_country(country).first
-    country[:latlng]
+    country = CountryService.get_a_country(country)
+
+    if country.class == Array
+      country.first[:latlng]
+    else
+      [-10000.0, 10000.0]
+    end
   end
 end
