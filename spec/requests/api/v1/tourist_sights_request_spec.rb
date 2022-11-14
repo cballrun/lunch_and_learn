@@ -29,5 +29,18 @@ RSpec.describe 'Tourist Sights API' do
         end
       end
     end
+
+    describe 'sad path' do
+      it 'sends back an empty array if there are no tourist sights' do
+        VCR.use_cassette('random_place_data') do
+          params = {country: "asdfds555esaew789ahje"}
+          
+          get "/api/v1/tourist_sights", params: params
+          binding.pry
+          expect(response).to be_successful
+        end
+      end
+    end
+
   end
 end
