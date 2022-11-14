@@ -41,7 +41,7 @@ RSpec.describe 'Recipes API' do
           recipes = recipes_data[:data]
           
           expect(recipes_data).to be_a(Hash)
-          expect(recipes.count).to eq(88)
+        
           recipes.each do |recipe|
             expect(recipe[:id]).to eq(nil)
             expect(recipe[:type]).to eq("recipe")
@@ -67,6 +67,20 @@ RSpec.describe 'Recipes API' do
           no_match_data = JSON.parse(response.body, symbolize_names: true)
 
           expect(no_match_data).to eq({"data": []})
+        end
+      end
+
+      it 'sends an empty data array back if the param is an empty string' do
+        VCR.use_cassette('empty_string_search') do
+          params = {country: ""}
+          
+          get "/api/v1/recipes", params: params
+
+          expect(response).to be_successful
+
+          empty_string_data = JSON.parse(response.body, symbolize_names: true)
+
+          expect(empty_string_data).to eq({"data": []})
         end
       end
     end
