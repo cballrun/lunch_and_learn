@@ -38,8 +38,14 @@ RSpec.describe 'Learning Resources API' do
           params = {country: "98asdsa7gghsdfaq55daqwrff"}
 
           get "/api/v1/learning_resources", params: params
-          binding.pry
           expect(response).to be_successful
+
+          learning_resource_data = JSON.parse(response.body, symbolize_names: true)
+          learning_resource = learning_resource_data[:data]
+
+          expect(learning_resource[:attributes][:country]).to eq("98asdsa7gghsdfaq55daqwrff")
+          expect(learning_resource[:attributes][:video]).to eq([])
+          expect(learning_resource[:attributes][:images]).to eq([])
         end
       end
     end
