@@ -8,9 +8,10 @@ RSpec.describe 'Users API' do
 
         expect(User.count).to eq(0)
         post '/api/v1/users', params: params
-
+      
         expect(response).to be_successful
         expect(User.count).to eq(1)
+        binding.pry
       end
     end
   end

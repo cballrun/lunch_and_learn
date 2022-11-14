@@ -41,6 +41,7 @@ group :development, :test do
   gem 'vcr'
   gem 'webmock'
   gem 'figaro'
+  
 end
 
 group :development do
