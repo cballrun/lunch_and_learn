@@ -20,4 +20,20 @@ RSpec.describe CountryFacade do
       expect(country.name).to be_a(String)
     end
   end
+
+  it 'gets the longitutde of a given country' do
+    VCR.use_cassette('paris_sight_data') do
+       lng = CountryFacade.get_lng('france')
+
+      expect(lng).to be_a(Float)
+    end
+  end
+
+  it 'gets the latitude of a given country' do
+    VCR.use_cassette('paris_sight_data') do
+      lat = CountryFacade.get_lat('france')
+
+      expect(lat).to be_a(Float)
+    end
+  end
 end
