@@ -3,22 +3,26 @@ require 'rails_helper'
 RSpec.describe PlaceService do
   describe 'API endpoint' do
 
-    it 'gets a place info' do
-      # VCR.use_cassette('thai_data') do
-      #   all_data = PlaceService.get_recipes("thailand")
-      #   all_recipe_data = all_data[:hits]
+    it 'gets info about tourism sights within 20000 meter radius of a countrys capital' do
+      VCR.use_cassette('paris_sight_data') do
+        all_data = PlaceService.get_tourist_sights("france")
+        all_feature_data = all_data[:features]
+        one_feature_data = all_feature_data.first
         
-      #   expect(all_data).to be_a(Hash)
-      #   expect(all_data[:q]).to be_a(String)
-      #   expect(all_recipe_data.count).to eq(10)
+        expect(all_data).to be_a(Hash)
+        expect(all_data[:type]).to eq("FeatureCollection")
+        expect(all_feature_data).to be_a(Array)
+        expect(all_feature_data.last).to be_a(Hash)
         
-      #   all_recipe_data.each do |recipe|
-      #     expect(recipe).to have_key(:recipe)
-      #     expect(recipe[:recipe][:label]).to be_a(String)
-      #     expect(recipe[:recipe][:url]).to be_a(String)
-      #     expect(recipe[:recipe][:image]).to be_a(String)
-      #   end
-      # end
+        all_feature_data.each do |feature|
+          expect(feature).to be_a(Hash)
+          expect(feature[:type]).to eq("Feature")
+          expect(feature[:properties][:name]).to be_a(String)
+          expect(feature[:properties][:formatted]).to be_a(String)
+          expect(feature[:properties][:place_id]).to be_a(String)
+        end
+        
+      end
     end
   end
 end

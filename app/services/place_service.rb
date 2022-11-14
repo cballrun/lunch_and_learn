@@ -1,7 +1,9 @@
 class PlaceService
-  def self.get_places(place)
-    # api_key = ENV['places_api_key']
-    response = conn.get("")
+  def self.get_tourist_sights(country)
+    location_data = CountryService.get_a_country('france').first
+    lng = location_data[:latlng].last
+    lat = location_data[:latlng].first
+    response = conn.get("?filter=circle:#{lng},#{lat},20000&categories=tourism.sights")
     parse(response.body)
   end
 
