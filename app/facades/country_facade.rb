@@ -23,4 +23,9 @@ class CountryFacade
 
     country[:latlng].first#, country[:latlng].first
   end
+
+  def self.get_latlng(country)
+    country = CountryService.get_a_country(country).first
+    country[:latlng]
+  end
 end

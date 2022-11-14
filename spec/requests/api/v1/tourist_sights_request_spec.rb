@@ -4,7 +4,7 @@ RSpec.describe 'Tourist Sights API' do
   describe 'tourist sights index' do
     describe 'happy path' do
       it 'sends a list of tourist sights with attributes name, address, and place id' do
-        VCR.use_cassette('paris_sight_data') do
+        VCR.use_cassette('api_sight_data') do
           params = {country: 'france'}
 
           get "/api/v1/tourist_sights", params: params

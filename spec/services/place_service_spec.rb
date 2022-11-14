@@ -4,7 +4,7 @@ RSpec.describe PlaceService do
   describe 'API endpoint' do
 
     it 'gets info about tourism sights within 20000 meter radius of a countrys capital' do
-      VCR.use_cassette('paris_sight_data') do
+      VCR.use_cassette('place_service_sight_data',:allow_playback_repeats => true) do
         all_data = PlaceService.get_tourist_sights("france")
         all_feature_data = all_data[:features]
         one_feature_data = all_feature_data.first

@@ -36,4 +36,12 @@ RSpec.describe CountryFacade do
       expect(lat).to be_a(Float)
     end
   end
+
+  it 'gets the latitude and longitude of a given country' do
+    VCR.use_cassette('paris_sight_data') do
+      latlng = CountryFacade.get_latlng('france')
+
+      expect(latlng).to be_a(Array)
+    end
+  end
 end

@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe TouristSightFacade do
 
   it 'gets tourist sight data and creates tourist sight objects' do
-    VCR.use_cassette('paris_sight_data') do
+    VCR.use_cassette('place_service_sight_data', :allow_playback_repeats => true) do
+      VCR.use_cassette('paris_facade_sight_data') do
       sights = TouristSightFacade.get_tourist_sights("france")
     
       expect(sights).to be_a(Array)
@@ -15,7 +16,7 @@ RSpec.describe TouristSightFacade do
         expect(sight.name).to be_a(String)
         expect(sight.place_id).to be_a(String)
       end
-    
+    end
     end
   end
 

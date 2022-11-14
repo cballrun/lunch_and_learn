@@ -1,8 +1,7 @@
 class PlaceService
   def self.get_tourist_sights(country)
-    lng = CountryFacade.get_lng(country)
-    lat = CountryFacade.get_lat(country)
-    response = conn.get("?filter=circle:#{lng},#{lat},20000&categories=tourism.sights")
+    latlng = CountryFacade.get_latlng(country)
+    response = conn.get("?filter=circle:#{latlng.last},#{latlng.first},20000&categories=tourism.sights")
     parse(response.body)
   end
 
