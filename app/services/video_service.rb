@@ -2,12 +2,14 @@ class VideoService
 
   def self.get_a_video(country)
     api_key = ENV['youtube_api_key']
-    response = conn.get("?part=snippet&channelId=UCluQ5yInbeAkkeCndNnUhpw&maxResults=1&q=#{country}&key=#{api_key}") #check: maybe take out hard coded max results and use only the .first in the facade to make more dynamic
+    response = conn.get("?part=snippet&channelId=UCluQ5yInbeAkkeCndNnUhpw&maxResults=1&q=#{country}") #check: maybe take out hard coded max results and use only the .first in the facade to make more dynamic
     parse(response.body)
   end
 
   def self.conn
-    Faraday.new('https://youtube.googleapis.com/youtube/v3/search')
+    Faraday.new('https://youtube.googleapis.com/youtube/v3/search') do |f|
+      f.params['key'] = ENV['youtube_api_key']
+    end
   end
 
   def self.parse(response)
@@ -15,3 +17,9 @@ class VideoService
   end
 
 end
+
+# def self.get_a_video(country)
+#   api_key = ENV['youtube_api_key']
+#   response = conn.get("?part=snippet&channelId=UCluQ5yInbeAkkeCndNnUhpw&maxResults=1&q=#{country}&key=#{api_key}") #check: maybe take out hard coded max results and use only the .first in the facade to make more dynamic
+#   parse(response.body)
+# end
