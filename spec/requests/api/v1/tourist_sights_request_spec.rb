@@ -13,7 +13,7 @@ RSpec.describe 'Tourist Sights API' do
 
           tourist_sight_data = JSON.parse(response.body, symbolize_names: true)
           tourist_sights = tourist_sight_data[:data]
-
+         
           expect(tourist_sight_data).to be_a(Hash)
           expect(tourist_sights).to be_a(Array)
 
