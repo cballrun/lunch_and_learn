@@ -1,7 +1,7 @@
 class RecipeService
   def self.get_recipes(country)
-    api_key = 'a1d62460d191ae34195c195984150c0b'
-    app_id = 'f5a8487a'
+    api_key = ENV['edamam_api_key']
+    app_id = ENV['edamam_app_id']
     response = conn.get("?q=#{country}&app_id=#{app_id}&app_key=#{api_key}")
     parse(response.body)
   end

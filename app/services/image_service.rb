@@ -1,8 +1,8 @@
 class ImageService
 
   def self.get_images(country)
-    access_key = 'H_aFp-PGCc9GZkfVHgx-m7tx-SqCt1MTBqeyWuG6CL4'
-    secret_key = 'OxMggLFDWRilwEL_7WENrqsgjwCcIgE-LULtd3Y1yxE'
+    access_key = ENV['unsplash_access_key']
+    secret_key = ENV['unsplash_secret_key']
     response = conn.get("?client_id=#{access_key}&query=#{country}")
     parse(response.body)
   end
