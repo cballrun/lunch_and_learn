@@ -71,7 +71,7 @@ RSpec.describe 'Favorites API' do
   describe 'favorites index' do
     describe 'happy path' do
 
-      it 'gets all of a users favorites' do
+      it 'gets all of a users favorites if data is valid' do
         user_1 = User.create!(name: "Jim Lahey", email: "supervisor@sunnyvale.ca", api_key: SecureRandom.hex(15))
         
         u1_f1 = user_1.favorites.create!(country: "laos", recipe_link: "www.fakerecipelink.com/grilledcheese", recipe_title: "grilled cheese")
@@ -102,9 +102,40 @@ RSpec.describe 'Favorites API' do
           expect(favorite[:attributes][:created_at]).to be_a(String)
         end
       end
-
-
     end
+
+    describe 'sad path' do
+      it 'returns an error message and http status 400 if the user does not exist' do
+        user_1 = User.create!(name: "Randy Bobandy", email: "assistantsupervisor@sunnyvale.ca", api_key: SecureRandom.hex(15))
+
+        params = {
+          "api_key": "dfdsad88",
+        }
+
+        get '/api/v1/favorites', params: params
+        error_message = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(400)
+        expect(error_message[:error]).to eq("User does not exist.")
+      end
+
+      it 'returns an empty data array if the user has no favorites' do
+        user_1 = User.create!(name: "Jim Lahey", email: "supervisor@sunnyvale.ca", api_key: SecureRandom.hex(15))
+
+        params = {
+          "api_key": user_1.api_key
+        }
+
+        get '/api/v1/favorites', params: params
+        no_favorites_data = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(response).to be_successful
+        expect(no_favorites_data).to eq({"data": []})
+      end
+    end
+
+      
+    
 
   end
 end

@@ -2,8 +2,12 @@ class Api::V1::FavoritesController < ApplicationController
 
   def index 
     user = User.find_by(api_key: params[:api_key])
-    favorites = user.favorites
-    render json: FavoriteSerializer.new(favorites), status: 201
+    if !user.nil?
+      favorites = user.favorites
+      render json: FavoriteSerializer.new(favorites), status: 201
+    else
+      render json: { error: "User does not exist." }, status: 400
+    end
   end
 
   def create
