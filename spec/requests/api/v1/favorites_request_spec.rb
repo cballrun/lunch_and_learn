@@ -12,11 +12,18 @@ RSpec.describe 'Favorites API' do
           "country": "thailand",
           "recipe_link": "https://www.tastingtable.com/.....",
           "recipe_title": "Crab Fried Rice (Khaao Pad Bpu)"
-      }
+        }
+
+        expect(Favorite.count).to eq(0)
 
         post '/api/v1/favorites', params: params
-
+        success_message = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(Favorite.count).to eq(1)
+        
         expect(response).to be_successful
+        expect(response).to have_http_status(201)
+        expect(success_message[:success]).to eq("Favorite added successfully.")
       end
     end
   end
