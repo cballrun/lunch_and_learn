@@ -66,6 +66,10 @@ RSpec.describe 'Users API' do
         binding.pry
         #xpect(error_message[:m])
       end
+
+      xit 'does not create a user given no params' do
+        
+      end
     end
   end
 end
