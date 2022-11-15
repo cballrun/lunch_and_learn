@@ -28,7 +28,7 @@ RSpec.describe 'Favorites API' do
     end
 
     describe 'sad path' do
-      it 'does not create a favorite if the user does not exist' do
+      it 'returns an error message and does not create a favorite if the user does not exist' do
         user_1 = User.create!(name: "Randy Bobandy", email: "assistantsupervisor@sunnyvale.ca", api_key: SecureRandom.hex(15))
 
         params = {
@@ -44,9 +44,27 @@ RSpec.describe 'Favorites API' do
         error_message = JSON.parse(response.body, symbolize_names: true)
 
         expect(Favorite.count).to eq(0)
-      
         expect(response).to have_http_status(400)
         expect(error_message[:error]).to eq("User does not exist")
+      end
+
+      it 'does not create a favorite with invalid params' do
+        user_1 = User.create!(name: "Randy Bobandy", email: "assistantsupervisor@sunnyvale.ca", api_key: SecureRandom.hex(15))
+
+        params = {
+          "api_key": user_1.api_key,
+          "recipe_link": "https://www.tastingtable.com/.....",
+          "recipe_title": "Crab Fried Rice (Khaao Pad Bpu)"
+        }
+
+        expect(Favorite.count).to eq(0)
+
+        post '/api/v1/favorites', params: params
+        error_message = JSON.parse(response.body, symbolize_names: true)
+    
+        expect(Favorite.count).to eq(0)
+        expect(response).to have_http_status(400)
+        expect(error_message[:error]).to eq("Country can't be blank")
       end
     end
   end
