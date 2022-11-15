@@ -57,18 +57,18 @@ RSpec.describe 'Users API' do
         expect(User.count).to eq(0)
         
         post '/api/v1/users', params: params
-        binding.pry 
+  
         expect(response).to be_successful
         expect(response).to have_http_status(400)
         expect(User.count).to eq(0)
 
         error_message = JSON.parse(response.body, symbolize_names: true)
-        binding.pry
+      
         #xpect(error_message[:m])
       end
 
       xit 'does not create a user given no params' do
-        
+
       end
     end
   end
