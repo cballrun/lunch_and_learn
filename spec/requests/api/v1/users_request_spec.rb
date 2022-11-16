@@ -43,7 +43,6 @@ RSpec.describe 'Users API' do
 
         post '/api/v1/users', params: params
         
-        # expect(response).to be_successful
         expect(response).to have_http_status(400)
         
         error_message = JSON.parse(response.body, symbolize_names: true)
@@ -52,23 +51,23 @@ RSpec.describe 'Users API' do
         expect(error_message[:message]).to eq("Email has already been taken")
       end
 
-      xit 'does not create a user given invalid user info' do
-        params = { name: 1536, email: 36.0}
+      it 'does not create a user given invalid user info' do
+        params = { random_param_1: "Randy Bobandy", random_param_2: "assistantsupervisor@sunnyvale.ca"}
         expect(User.count).to eq(0)
         
         post '/api/v1/users', params: params
   
-        expect(response).to be_successful
         expect(response).to have_http_status(400)
         expect(User.count).to eq(0)
-
-        error_message = JSON.parse(response.body, symbolize_names: true)
-      
-        #xpect(error_message[:m])
       end
 
-      xit 'does not create a user given no params' do
-
+      it 'does not create a user given no params' do
+        expect(User.count).to eq(0)
+        
+        post '/api/v1/users'
+  
+        expect(response).to have_http_status(400)
+        expect(User.count).to eq(0)
       end
     end
   end
