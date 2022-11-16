@@ -89,6 +89,20 @@ RSpec.describe 'Recipes API' do
           expect(empty_string_data).to eq({"data": []})
         end
       end
+
+      it 'sends an error back if there are invalid params' do
+        VCR.use_cassette('invalid_recipe_params') do
+          params = {random_param: "thailand"}
+          
+          get "/api/v1/recipes", params: params
+
+          expect(response).to have_http_status(400)
+         
+          error_message = JSON.parse(response.body, symbolize_names: true)
+
+          expect(error_message[:error]).to eq("Invalid request")
+        end
+      end
     end
   end
 end
