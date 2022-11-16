@@ -12,7 +12,7 @@ RSpec.describe VideoService do
         expect(all_data[:items].count).to eq(1)
         
         expect(video_data).to be_a(Hash)
-        
+       
         expect(video_data[:id]).to be_a(Hash)
         expect(video_data[:id].keys.count).to eq(2)
         expect(video_data[:id][:videoId]).to be_a(String)
