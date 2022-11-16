@@ -65,6 +65,15 @@ RSpec.describe 'Favorites API' do
         expect(response).to have_http_status(400)
         expect(error_message[:error]).to eq("Country can't be blank")
       end
+
+      it 'does not create a favorite with no params' do
+        expect(Favorite.count).to eq(0)
+        
+        post '/api/v1/favorites'
+
+        expect(response).to have_http_status(400)
+        expect(Favorite.count).to eq(0)
+      end
     end
   end
 
@@ -133,9 +142,5 @@ RSpec.describe 'Favorites API' do
         expect(no_favorites_data).to eq({"data": []})
       end
     end
-
-      
-    
-
   end
 end
