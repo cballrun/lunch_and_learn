@@ -8,7 +8,7 @@ RSpec.describe RecipeFacade do
       recipe = recipes.first
 
       
-      expect(recipes.count).to eq(10)
+      
       expect(recipes).to be_a(Array)
       expect(recipes.last).to be_a(Recipe)
       expect(recipe.country).to eq("thailand")

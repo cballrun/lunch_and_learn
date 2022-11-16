@@ -10,14 +10,24 @@ RSpec.describe RecipeService do
         
         expect(all_data).to be_a(Hash)
         expect(all_data[:q]).to be_a(String)
-        expect(all_recipe_data.count).to eq(10)
+        expect(all_data[:q]).to eq("thailand")
         
         all_recipe_data.each do |recipe|
           expect(recipe).to have_key(:recipe)
           expect(recipe[:recipe][:label]).to be_a(String)
           expect(recipe[:recipe][:url]).to be_a(String)
           expect(recipe[:recipe][:image]).to be_a(String)
+          expect(recipe[:recipe]).to_not have_key(:country)
+          expect(recipe).to_not have_key(:country)
         end
+      end
+    end
+
+    it 'returns an empty array if no recipes match' do
+      VCR.use_cassette('recipe_service_random') do
+        all_data = RecipeService.get_recipes("dzfdsa33r")
+        
+        expect(all_data[:hits]).to eq([])
       end
     end
   end

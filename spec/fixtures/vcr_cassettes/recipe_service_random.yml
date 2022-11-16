@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.edamam.com/search?app_id=f5a8487a&app_key=a1d62460d191ae34195c195984150c0b&q=dzfdsa33r
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Wed, 16 Nov 2022 01:55:13 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Served-By:
+      - ip-10-0-1-10.ec2.internal/10.0.1.10
+      Vary:
+      - accept-encoding
+      Strict-Transport-Security:
+      - max-age=15552001
+      X-Request-Id:
+      - 6912e3d160c1ef900af19691f0c9dcc3
+    body:
+      encoding: UTF-8
+      string: '{"q":"dzfdsa33r","from":0,"to":10,"more":false,"count":0,"hits":[]}'
+  recorded_at: Wed, 16 Nov 2022 01:55:13 GMT
+recorded_with: VCR 6.1.0
