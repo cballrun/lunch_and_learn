@@ -48,6 +48,38 @@ RSpec.describe 'Learning Resources API' do
           expect(learning_resource[:attributes][:images]).to eq([])
         end
       end
+
+      it 'returns empty arrays with an empty string' do
+        VCR.use_cassette('learning_resource_empty_string') do
+        
+          params = {country: ""}
+          get "/api/v1/learning_resources", params: params
+          expect(response).to be_successful
+
+          learning_resource_data = JSON.parse(response.body, symbolize_names: true)
+          learning_resource = learning_resource_data[:data]
+
+          expect(learning_resource[:attributes][:country]).to eq("Invalid search")
+          expect(learning_resource[:attributes][:video]).to eq([])
+          expect(learning_resource[:attributes][:images]).to eq([])
+        end
+      end
+
+      it 'returns empty arrays with a random param' do
+        VCR.use_cassette('learning_resource_random_param') do
+        
+          params = {random_param: "laos"}
+          get "/api/v1/learning_resources", params: params
+          expect(response).to be_successful
+
+          learning_resource_data = JSON.parse(response.body, symbolize_names: true)
+          learning_resource = learning_resource_data[:data]
+
+          expect(learning_resource[:attributes][:country]).to eq("Invalid search")
+          expect(learning_resource[:attributes][:video]).to eq([])
+          expect(learning_resource[:attributes][:images]).to eq([])
+        end
+      end
     end
   end
 end
